@@ -107,3 +107,72 @@ class WriteHandler(RequestHandler):
         # 刷新缓冲区，关闭档次请求通道
         # 在finish下面不要write
         self.finish()
+
+
+import json
+
+
+class Json1Handler(RequestHandler):
+    def get(self, *args, **kwargs):
+        per = {
+            "name": "sunck",
+            "age": 18,
+            "height": 175,
+            "weight": 60
+        }
+        jsonStr = json.dumps(per)
+        self.set_header("Content-Type", "application/json; charset=UTF-8")
+        self.set_header("sunck", "good")
+        self.write(jsonStr)
+
+
+class Json2Handler(RequestHandler):
+    def get(self, *args, **kwargs):
+        per = {
+            "name": "sunck",
+            "age": 18,
+            "height": 175,
+            "weight": 60
+        }
+        self.write(per)
+
+
+class HeaderHandler(RequestHandler):
+    # 在进入http响应处理方法之前被调用，可以重写该方法来预先设置默认的headers
+    def set_default_headers(self):
+        self.set_header("Content-Type", "text/html; charset=UTF-8")
+
+    def get(self, *args, **kwargs):
+        pass
+
+
+class StatusCodeHandler(RequestHandler):
+    def get(self, *args, **kwargs):
+        # self.set_status(404)
+
+        # 自定义状态码
+        self.set_status(999, "what's wrong?")
+        self.write("************")
+
+
+class RedirectHandler(RequestHandler):
+    def get(self, *args, **kwargs):
+        self.redirect("/")
+
+
+class ErrorHandler(RequestHandler):
+    def write_error(self, status_code, **kwargs):
+        if status_code == 500:
+            code = 500
+            self.write("500, 服务器内部错误")
+        elif status_code == 404:
+            code = 404
+            self.write("404,资源不存在")
+        self.set_status(code)
+
+    def get(self, *args, **kwargs):
+        flag = self.get_query_argument("flag")
+        if flag == '0':
+            self.send_error(500)
+
+        self.write("you are right")

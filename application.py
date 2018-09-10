@@ -39,8 +39,23 @@ class Application(tornado.web.Application):
 
 
             # write
-            (r'/write',index.WriteHandler)
+            (r'/write', index.WriteHandler),
 
+            #json
+            (r"/json1", index.Json1Handler),
+            (r"/json2", index.Json2Handler),
+
+            # header
+            (r"/header",index.HeaderHandler),
+
+            #status code
+            (r"/status", index.StatusCodeHandler),
+
+            # 重定向
+            (r'/index',index.RedirectHandler),
+
+            # 错误处理
+            (r'/iserror',index.ErrorHandler),
 
         ]
 
