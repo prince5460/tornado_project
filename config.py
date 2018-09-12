@@ -10,7 +10,7 @@ __author__ = 'zhousp'
 
 # 参数
 options = {
-    "port": 9000,
+    "port": 8000,
 }
 
 # 配置
@@ -21,4 +21,6 @@ settings = {
     "debug": True,
     # 仅自动重启
     # "autoreload":True,
+    # 关闭当前项目自动转义
+    # "autoescape":None,
 }

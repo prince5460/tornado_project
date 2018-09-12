@@ -11,9 +11,34 @@ __author__ = 'zhousp'
 
 
 class IndexHandler(RequestHandler):
+    '''
+    接口的调用顺序:
+    set_default_headers
+    initialize
+    prepare
+    HTTP方法
+    on_finish
+    '''
+
+    def initialize(self):
+        print("initialize")
+
+    def prepare(self):
+        print("prepare")
+
     def get(self, *args, **kwargs):
+        print("HTTP方法")
         url = self.reverse_url("other")
         self.write('<a href="%s">other</a>' % (url))
+
+    def set_default_headers(self):
+        print("set_default_headers")
+
+    def write_error(self, status_code, **kwargs):
+        print("write_error")
+
+    def on_finish(self):
+        print("on_finish")
 
 
 class HomeHandler(RequestHandler):
