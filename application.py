@@ -69,9 +69,12 @@ class Application(tornado.web.Application):
             # 继承
             (r'/cart', index2.CartHandler),
 
-            # StaticFileHandler
+            # 数据库
+            (r'/students', index2.StudentsHandler),
+
+            # StaticFileHandler,要放在所有路由的最下面
             (r'/(.*)$', tornado.web.StaticFileHandler, {"path": os.path.join(config.BASE_DIR, "static/html"),
-             "default_filename": "index.html"})
+                                                        "default_filename": "index.html"}),
 
         ]
 

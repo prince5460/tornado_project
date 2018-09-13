@@ -3,6 +3,7 @@ Created by ZhouSp 18-9-11.
 '''
 
 from tornado.web import RequestHandler
+from models import Students
 
 import os
 import config
@@ -57,4 +58,17 @@ class TransHandler(RequestHandler):
 
 class CartHandler(RequestHandler):
     def get(self, *args, **kwargs):
-        self.render("cart.html")
+        self.render('cart.html')
+
+
+class StudentsHandler(RequestHandler):
+    def get(self, *args, **kwargs):
+
+        # 插入数据
+        # stu = Students("liudehua",18)
+        # stu.save()
+        # self.write("ok")
+
+        # 从数据库中提取数据
+        stus = Students.all()
+        self.render('students.html', stus=stus)

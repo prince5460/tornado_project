@@ -13,6 +13,14 @@ options = {
     "port": 8000,
 }
 
+# 数据库配置
+mysql = {
+    "host": "192.168.10.103",
+    "user": "root",
+    "passwd": "zhou1234",
+    "dbName": "test"
+}
+
 # 配置
 settings = {
     "static_path": os.path.join(BASE_DIR, 'static'),
